@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Prediction History | HousePredict</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        color: #1e293b;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        background: white;
+        padding: 20px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .brand {
+        color: #5145e5;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .nav-link {
+        color: #5145e5;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 22px;
+    }
+
+    .heading {
+        margin-bottom: 25px;
+    }
+
+    .heading h1 {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .heading p {
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .history-card {
+        background: white;
+        padding: 28px;
+        border-radius: 18px;
+        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.05);
+        border: 1px solid #e9eaf3;
+    }
+
+    .table-heading {
+        font-size: 19px;
+        margin-bottom: 20px;
+    }
+
+    .table-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+    }
+
+    table {
+        width: 100%;
+        min-width: 850px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 16px 14px;
+        text-align: center;
+        border-bottom: 1px solid #e2e8f0;
+        white-space: nowrap;
+    }
+
+    th {
+        background: #5145e5;
+        color: white;
+        font-size: 13px;
+    }
+
+    td {
+        font-size: 14px;
+    }
+
+    tbody tr:nth-child(even) {
+        background: #f8faff;
+    }
+
+    tbody tr:hover {
+        background: #f0edff;
+    }
+
+    .price {
+        color: #047857;
+        font-weight: bold;
+    }
+
+    .empty {
+        text-align: center;
+        padding: 45px 15px;
+    }
+
+    .empty-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+    }
+
+    .empty h3 {
+        margin-bottom: 10px;
+    }
+
+    .empty p {
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-top: 25px;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 13px 21px;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 14px;
+        transition: 0.2s;
+    }
+
+    .primary {
+        background: #5145e5;
+        color: white;
+    }
+
+    .primary:hover {
+        background: #3f35bd;
+        transform: translateY(-2px);
+    }
+
+    .secondary {
+        background: white;
+        color: #5145e5;
+        border: 1px solid #ddd9ff;
+    }
+
+    .secondary:hover {
+        background: #f0edff;
+    }
+
+    footer {
+        text-align: center;
+        padding: 25px;
+        color: #94a3b8;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        .navbar {
+            padding: 18px 5%;
+        }
+
+        .brand {
+            font-size: 19px;
+        }
+
+        .container {
+            margin: 28px auto;
+            padding: 0 14px;
+        }
+
+        .heading h1 {
+            font-size: 25px;
+        }
+
+        .history-card {
+            padding: 18px 12px;
+        }
+
+        .actions {
+            flex-direction: column;
+        }
+
+        .btn {
+            text-align: center;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<nav class="navbar">
+    <div class="brand">🏠 HousePredict</div>
+    <a class="nav-link" href="{% url 'home' %}">← Dashboard</a>
+</nav>
+
+<main class="container">
+
+    <header class="heading">
+        <h1>📋 Prediction History</h1>
+        <p>View your previous house price predictions in one place.</p>
+    </header>
+
+    <section class="history-card">
+
+        <h2 class="table-heading">Your Previous Predictions</h2>
+
+        {% if predictions %}
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Area (sq. ft.)</th>
+                            <th>Bedrooms</th>
+                            <th>Bathrooms</th>
+                            <th>Location</th>
+                            <th>Predicted Price</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in predictions %}
+                            <tr>
+                                <td>{{ item.created_at|date:"d-m-Y H:i" }}</td>
+                                <td>{{ item.area }}</td>
+                                <td>{{ item.bedrooms }}</td>
+                                <td>{{ item.bathrooms }}</td>
+                                <td>📍 {{ item.location }}</td>
+                                <td class="price">
+                                    ₹{{ item.predicted_price|floatformat:2 }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        {% else %}
+
+            <div class="empty">
+                <div class="empty-icon">🏡</div>
+                <h3>No Prediction History Yet</h3>
+                <p>Your previous predictions will appear here.<br>
+                Make your first prediction to get started!</p>
+            </div>
+
+        {% endif %}
+
+        <div class="actions">
+            <a class="btn primary" href="{% url 'predict' %}">
+                ✨ Predict House Price
+            </a>
+
+            <a class="btn secondary" href="{% url 'home' %}">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    HousePredict · House Price Prediction System
+</footer>
+```
+
+</body>
+</html>

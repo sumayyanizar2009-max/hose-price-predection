@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction | Dashboard</title>
+
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f6fb;
+        color: #1e293b;
+        min-height: 100vh;
+    }
+
+    .navbar {
+        background: #ffffff;
+        padding: 20px 7%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .brand {
+        color: #5145e5;
+        font-size: 22px;
+        font-weight: bold;
+    }
+
+    .nav-label {
+        color: #64748b;
+        font-size: 14px;
+    }
+
+    
+.profile-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    color: #5145e5;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 5px 0;
+}
+
+.profile-dropdown a {
+    display: block;
+    color: #5145e5;
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+}
+
+.profile-dropdown a:hover {
+    background: #f0edff;
+}
+
+
+
+    .container {
+        max-width: 1100px;
+        margin: 45px auto;
+        padding: 0 25px;
+    }
+
+    .welcome {
+        background: linear-gradient(135deg, #5145e5, #8b5cf6);
+        color: white;
+        padding: 38px;
+        border-radius: 22px;
+        margin-bottom: 30px;
+        box-shadow: 0 12px 30px rgba(81, 69, 229, 0.2);
+    }
+
+    .welcome h1 {
+        font-size: 30px;
+        margin-bottom: 12px;
+    }
+
+    .welcome p {
+        line-height: 1.7;
+        color: #ede9fe;
+    }
+
+    .section-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        margin-bottom: 35px;
+    }
+
+    .card {
+        background: white;
+        padding: 28px;
+        border-radius: 18px;
+        box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+        border: 1px solid #e9eaf3;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.09);
+    }
+
+    .card-icon {
+        font-size: 30px;
+        margin-bottom: 18px;
+    }
+
+    .card h3 {
+        color: #64748b;
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .number {
+        color: #5145e5;
+        font-size: 32px;
+        font-weight: bold;
+        overflow-wrap: anywhere;
+    }
+
+    .location {
+        color: #64748b;
+        margin-top: 12px;
+    }
+
+    .actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .action-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 19px;
+        border-radius: 14px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.2s;
+    }
+
+    .primary {
+        background: #5145e5;
+        color: white;
+    }
+
+    .primary:hover {
+        background: #3f35bd;
+        transform: translateY(-2px);
+    }
+
+    .secondary {
+        background: white;
+        color: #5145e5;
+        border: 1px solid #ddd9ff;
+    }
+
+    .secondary:hover {
+        background: #f0edff;
+    }
+
+    .logout-wrap {
+        text-align: center;
+        margin-top: 28px;
+    }
+
+    .logout {
+        display: inline-block;
+        padding: 12px 28px;
+        color: #dc2626;
+        background: #fee2e2;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: bold;
+    }
+
+    .logout:hover {
+        background: #fecaca;
+    }
+
+    footer {
+        text-align: center;
+        color: #94a3b8;
+        padding: 25px;
+        font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+        .navbar {
+            padding: 18px 6%;
+        }
+
+        .brand {
+            font-size: 18px;
+        }
+
+        .container {
+            margin: 25px auto;
+            padding: 0 16px;
+        }
+
+        .welcome {
+            padding: 25px;
+        }
+
+        .welcome h1 {
+            font-size: 24px;
+        }
+
+        .cards,
+        .actions {
+            grid-template-columns: 1fr;
+        }
+
+        .card {
+            padding: 23px;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+    <div class="brand">🏠 HousePredict</div>
+<div class="profile-menu">
+    <button class="profile-button" onclick="toggleProfileMenu()">
+        <span class="profile-avatar">👤</span>
+        <span>{{ request.user.username }}</span>
+        <span>⌄</span>
+    </button>
+
+    <div class="profile-dropdown" id="profileDropdown">
+        <a href="{% url 'settings' %}">👤 My Profile</a>
+        <a href="#">✏️ Edit Profile</a>
+        <a href="{% url 'logout' %}">🚪 Logout</a>
+    </div>
+</div>
+
+</nav>
+
+
+<script>
+function toggleProfileMenu() {
+    const menu = document.getElementById("profileDropdown");
+    menu.style.display =
+        menu.style.display === "block" ? "none" : "block";
+}
+</script>
+
+</nav>
+
+<main class="container">
+
+    <section class="welcome">
+        <h1>Welcome to Your Dashboard! 👋</h1>
+        <p>
+            Predict house prices, check your previous predictions,
+            and manage your house price estimates in one place.
+        </p>
+    </section>
+
+    <h2 class="section-title">📊 Your Overview</h2>
+
+    <section class="cards">
+
+        <div class="card">
+            <div class="card-icon">📈</div>
+            <h3>Total Predictions</h3>
+            <div class="number">{{ total_predictions }}</div>
+            <p class="location">Predictions you have made</p>
+        </div>
+
+        <div class="card">
+            <div class="card-icon">🏡</div>
+            <h3>Latest Prediction</h3>
+
+            {% if latest_prediction %}
+                <div class="number">
+                    ₹{{ latest_prediction.predicted_price|floatformat:0 }}
+                </div>
+                <p class="location">
+                    📍 {{ latest_prediction.location }}
+                </p>
+            {% else %}
+                <p class="location">No predictions yet. Make your first prediction!</p>
+            {% endif %}
+        </div>
+
+    </section>
+
+    <h2 class="section-title">⚡ Quick Actions</h2>
+
+    <section class="actions">
+        <a class="action-btn primary" href="{% url 'predict' %}">
+            🏡 Predict House Price
+        </a>
+
+        <a class="action-btn secondary" href="{% url 'history' %}">
+            📋 View Prediction History
+        </a>
+    </section>
+
+    <h2 class="section-title">🕒 Recent Predictions</h2>
+
+<section class="card" style="overflow-x: auto; margin-bottom: 30px;">
+
+
+{% if recent_predictions %}
+    <table style="width: 100%; border-collapse: collapse; min-width: 550px;">
+
+        <thead>
+            <tr style="background: #5145e5; color: white;">
+                <th style="padding: 14px; text-align: left;">Location</th>
+                <th style="padding: 14px; text-align: center;">Area</th>
+                <th style="padding: 14px; text-align: center;">Date</th>
+                <th style="padding: 14px; text-align: right;">Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in recent_predictions %}
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                    <td style="padding: 14px;">
+                        📍 {{ item.location }}
+                    </td>
+
+                    <td style="padding: 14px; text-align: center;">
+                        {{ item.area }} sq. ft.
+                    </td>
+
+                    <td style="padding: 14px; text-align: center;">
+                        {{ item.created_at|date:"d-m-Y" }}
+                    </td>
+
+                    <td style="padding: 14px; text-align: right; color: #047857; font-weight: bold;">
+                        ₹{{ item.predicted_price|floatformat:0 }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+    <p style="margin-top: 18px; text-align: right;">
+        <a href="{% url 'history' %}"
+           style="color: #5145e5; text-decoration: none; font-weight: bold;">
+            View All History →
+        </a>
+    </p>
+
+{% else %}
+    <p style="color: #64748b; line-height: 1.7;">
+        No predictions yet. Start by predicting your first house price!
+    </p>
+
+    <a href="{% url 'predict' %}"
+       style="display: inline-block; margin-top: 15px; background: #5145e5; color: white; padding: 12px 18px; border-radius: 9px; text-decoration: none;">
+        ✨ Make Your First Prediction
+    </a>
+{% endif %}
+
+</section>
+
+
+    <div class="logout-wrap">
+        <a class="logout" href="{% url 'logout' %}">↪ Logout</a>
+    </div>
+
+</main>
+
+<footer>
+    HousePredict · House Price Prediction System
+</footer>
+
+<script>
+    function toggleProfileMenu() {
+        const menu = document.getElementById("profileDropdown");
+
+        if (menu.style.display === "block") {
+            menu.style.display = "none";
+        } else {
+            menu.style.display = "block";
+        }
+    }
+</script>
+
+
+</body>
+</html>
