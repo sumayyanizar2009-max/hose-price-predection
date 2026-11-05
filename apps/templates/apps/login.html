@@ -1,283 +1,389 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | HousePredict</title>
 
+    <title>Login | HomeValue</title>
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #eef2ff, #f5f3ff, #ede9fe);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 25px 15px;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 430px;
-        background: white;
-        padding: 38px 32px;
-        border-radius: 22px;
-        box-shadow: 0 15px 45px rgba(81, 69, 229, 0.12);
-        border: 1px solid #ede9fe;
-    }
-
-    .logo {
-        width: 75px;
-        height: 75px;
-        margin: 0 auto 20px;
-        border-radius: 22px;
-        background: linear-gradient(135deg, #5145e5, #8b5cf6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 38px;
-        box-shadow: 0 8px 20px rgba(81, 69, 229, 0.2);
-    }
-
-    h1 {
-        text-align: center;
-        color: #1e293b;
-        font-size: 27px;
-        margin-bottom: 10px;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #64748b;
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 28px;
-    }
-
-    .messages {
-        margin-bottom: 18px;
-    }
-
-    .message {
-        background: #fff1f2;
-        color: #be123c;
-        padding: 12px;
-        border-radius: 9px;
-        font-size: 14px;
-        margin-bottom: 8px;
-        line-height: 1.5;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 9px;
-        color: #334155;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    .input-wrap {
-        position: relative;
-    }
-
-    input {
-        width: 100%;
-        padding: 14px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        font-size: 15px;
-        outline: none;
-        transition: 0.2s;
-    }
-
-    input:focus {
-        border-color: #5145e5;
-        box-shadow: 0 0 0 3px rgba(81, 69, 229, 0.12);
-    }
-
-    .password-input {
-        padding-right: 75px;
-    }
-
-    .toggle-password {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: transparent;
-        color: #5145e5;
-        font-size: 12px;
-        font-weight: bold;
-        cursor: pointer;
-        padding: 8px 0 8px 8px;
-    }
-
-    .login-btn {
-        width: 100%;
-        padding: 15px;
-        margin-top: 8px;
-        background: linear-gradient(135deg, #5145e5, #7c3aed);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .login-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(81, 69, 229, 0.25);
-    }
-
-    .register-text {
-        text-align: center;
-        margin-top: 25px;
-        font-size: 14px;
-        color: #64748b;
-        line-height: 1.8;
-    }
-
-    a {
-        color: #5145e5;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    .footer {
-        text-align: center;
-        margin-top: 25px;
-        color: #94a3b8;
-        font-size: 12px;
-    }
-
-    @media (max-width: 400px) {
-        .container {
-            padding: 30px 22px;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            background: #edf2f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 1000px;
+            min-height: 570px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(25, 50, 90, 0.14);
+        }
+
+        /* Left side */
+
+        .left-panel {
+            position: relative;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(8, 30, 65, 0.05),
+                    rgba(8, 30, 65, 0.92)
+                ),
+                url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1000&q=85");
+
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand {
             font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
         }
-    }
-</style>
 
+        .brand span {
+            color: #8de0cb;
+        }
 
+        .left-content h1 {
+            font-size: 38px;
+            line-height: 1.25;
+            margin-bottom: 18px;
+        }
+
+        .left-content p {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #e3eaf4;
+            max-width: 350px;
+        }
+
+        .left-footer {
+            font-size: 12px;
+            color: #d9e4f2;
+        }
+
+        /* Right side */
+
+        .right-panel {
+            padding: 55px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome {
+            color: #0f9f86;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .right-panel h2 {
+            font-size: 32px;
+            color: #172b4d;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #7b879a;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            color: #34445d;
+            margin-bottom: 9px;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            border: 1px solid #dce3ed;
+            border-radius: 9px;
+            background: #f8fafc;
+            transition: 0.25s;
+        }
+
+        .input-box:focus-within {
+            border-color: #0f9f86;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(15, 159, 134, 0.1);
+        }
+
+        .input-icon {
+            padding-left: 14px;
+            font-size: 17px;
+        }
+
+        .input-box input {
+            width: 100%;
+            padding: 15px 12px;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 14px;
+            color: #172b4d;
+        }
+
+        .input-box input::placeholder {
+            color: #a0aabb;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #123d63;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            background: #0f9f86;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(15, 159, 134, 0.2);
+        }
+
+        .messages {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .messages li {
+            padding: 12px;
+            border-radius: 8px;
+            background: #fff0f0;
+            color: #b42318;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .signup-section {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid #e8edf4;
+            text-align: center;
+        }
+
+        .signup-section p {
+            font-size: 13px;
+            color: #7b879a;
+            margin-bottom: 15px;
+        }
+
+        .signup-button {
+            display: inline-block;
+            text-decoration: none;
+            border: 1px solid #0f9f86;
+            color: #0f8d79;
+            padding: 11px 30px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .signup-button:hover {
+            background: #0f9f86;
+            color: white;
+        }
+
+        .back-home {
+            text-align: center;
+            margin-top: 22px;
+        }
+
+        .back-home a {
+            color: #64748b;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .back-home a:hover {
+            color: #0f9f86;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 15px;
+            }
+
+            .login-container {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+            }
+
+            .left-panel {
+                min-height: 240px;
+                padding: 25px;
+            }
+
+            .left-content {
+                margin-top: 45px;
+            }
+
+            .left-content h1 {
+                font-size: 27px;
+            }
+
+            .left-footer {
+                margin-top: 25px;
+            }
+
+            .right-panel {
+                padding: 35px 25px;
+            }
+
+            .right-panel h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+<div class="login-container">
 
-<main class="container">
+    <!-- Left image panel -->
 
-    <div class="logo">🏠</div>
+    <div class="left-panel">
 
-    <h1>Welcome Back!</h1>
-    <p class="subtitle">
-        Login to your HousePredict account<br>
-        and continue predicting house prices.
-    </p>
-
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <p class="message">{{ message }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    <form method="POST">
-        {% csrf_token %}
-
-        <div class="form-group">
-            <label for="username">👤 Username</label>
-            <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Enter your username"
-                autocomplete="username"
-                required
-            >
+        <div class="brand">
+            Home<span>Value.</span>
         </div>
 
-        <div class="form-group">
-            <label for="password">🔒 Password</label>
+        <div class="left-content">
+            <h1>Your dream home<br>starts here.</h1>
 
-            <div class="input-wrap">
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="password-input"
-                    placeholder="Enter your password"
-                    autocomplete="current-password"
-                    required
-                >
-
-                <button
-                    type="button"
-                    class="toggle-password"
-                    id="togglePassword"
-                    aria-label="Show password"
-                    aria-pressed="false"
-                >
-                    Show
-                </button>
-            </div>
+            <p>
+                Sign in to estimate house prices, explore property values
+                and access your saved predictions.
+            </p>
         </div>
 
-        <button type="submit" class="login-btn">
-            Login to Account →
-        </button>
-    </form>
+        <div class="left-footer">
+            Smart Property Insights · House Price Prediction
+        </div>
 
-    <p class="register-text">
-        Don't have an account?<br>
-        <a href="{% url 'register' %}">Create a new account</a>
-    </p>
-
-    <div class="footer">
-        HousePredict · House Price Prediction System
     </div>
 
-</main>
+    <!-- Right login panel -->
 
-<script>
-    const passwordInput = document.getElementById("password");
-    const toggleButton = document.getElementById("togglePassword");
+    <div class="right-panel">
 
-    toggleButton.addEventListener("click", function () {
-        const isHidden = passwordInput.type === "password";
+        <div class="welcome">Welcome back</div>
 
-        passwordInput.type = isHidden ? "text" : "password";
-        toggleButton.textContent = isHidden ? "Hide" : "Show";
-        toggleButton.setAttribute("aria-pressed", String(isHidden));
-        toggleButton.setAttribute(
-            "aria-label",
-            isHidden ? "Hide password" : "Show password"
-        );
-    });
-</script>
+        <h2>Login to your account</h2>
 
+        <p class="subtitle">
+            Enter your account details to continue.
+        </p>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <div class="input-box">
+                    <span class="input-icon">👤</span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <div class="input-box">
+                    <span class="input-icon">🔒</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+            </div>
+
+            <button type="submit" class="login-button">
+                Login to Dashboard →
+            </button>
+
+        </form>
+
+        <div class="signup-section">
+            <p>Don't have an account yet?</p>
+
+            <a href="{% url 'register' %}" class="signup-button">
+                Create Account
+            </a>
+        </div>
+
+        <div class="back-home">
+            <a href="{% url 'home' %}">← Back to Home</a>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
+

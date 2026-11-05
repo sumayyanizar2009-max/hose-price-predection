@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Details | HomeValue</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f4f8;
+            color: #1e293b;
+        }
+
+        header {
+            background: #172554;
+            color: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        header h2 {
+            margin: 0;
+        }
+
+        header a {
+            color: white;
+            text-decoration: none;
+            margin-left: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 35px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px #00000010;
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #172554;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: 2px solid #93c5fd;
+            border-color: #2563eb;
+        }
+
+        .upload-section {
+            margin-top: 30px;
+            padding: 22px;
+            border: 2px dashed #93c5fd;
+            border-radius: 12px;
+            background: #f8fbff;
+        }
+
+        .upload-section h3 {
+            margin-top: 0;
+        }
+
+        #preview {
+            display: none;
+            max-width: 100%;
+            max-height: 300px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+
+        #fileName {
+            color: #475569;
+            margin-top: 10px;
+            overflow-wrap: anywhere;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        .messages {
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background: #eff6ff;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 18px;
+                padding: 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header {
+                padding: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h2>HomeValue 🏠</h2>
+    <nav>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'predict' %}">Predict Price</a>
+        <a href="{% url 'history' %}">History</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    <h1>Enter Your House Details</h1>
+    <p class="subtitle">
+        Enter your house information and optionally upload your house plan.
+    </p>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="messages">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-grid">
+
+            <div class="field">
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location"
+                       placeholder="Enter city or area" required>
+            </div>
+
+            <div class="field">
+                <label for="area">Area (sq. ft.)</label>
+                <input type="number" id="area" name="area"
+                       min="1" step="any" placeholder="e.g. 1200" required>
+            </div>
+
+            <div class="field">
+                <label for="bedrooms">Bedrooms</label>
+                <select id="bedrooms" name="bedrooms" required>
+                    <option value="">Select bedrooms</option>
+                    <option value="1">1 Bedroom</option>
+                    <option value="2">2 Bedrooms</option>
+                    <option value="3">3 Bedrooms</option>
+                    <option value="4">4 Bedrooms</option>
+                    <option value="5">5 Bedrooms</option>
+                    <option value="6">6+ Bedrooms</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="bathrooms">Bathrooms</label>
+                <select id="bathrooms" name="bathrooms" required>
+                    <option value="">Select bathrooms</option>
+                    <option value="1">1 Bathroom</option>
+                    <option value="2">2 Bathrooms</option>
+                    <option value="3">3 Bathrooms</option>
+                    <option value="4">4 Bathrooms</option>
+                    <option value="5">5+ Bathrooms</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="kitchen">Kitchen</label>
+                <select id="kitchen" name="kitchen" required>
+                    <option value="">Select kitchen</option>
+                    <option value="1">1 Kitchen</option>
+                    <option value="2">2 Kitchens</option>
+                    <option value="3">3 Kitchens</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="floors">Number of Floors</label>
+                <select id="floors" name="floors" required>
+                    <option value="">Select floors</option>
+                    <option value="1">Single Floor</option>
+                    <option value="2">2 Floors</option>
+                    <option value="3">3 Floors</option>
+                    <option value="4">4+ Floors</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="parking">Parking</label>
+                <select id="parking" name="parking" required>
+                    <option value="">Select parking</option>
+                    <option value="No">No Parking</option>
+                    <option value="1 Car">1 Car</option>
+                    <option value="2 Cars">2 Cars</option>
+                    <option value="3+ Cars">3+ Cars</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="house_type">House Type</label>
+                <select id="house_type" name="house_type" required>
+                    <option value="">Select house type</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Independent House">Independent House</option>
+                    <option value="Duplex">Duplex</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="furnishing">Furnishing</label>
+                <select id="furnishing" name="furnishing" required>
+                    <option value="">Select furnishing</option>
+                    <option value="Unfurnished">Unfurnished</option>
+                    <option value="Semi-Furnished">Semi-Furnished</option>
+                    <option value="Fully-Furnished">Fully-Furnished</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="upload-section">
+            <h3>📁 Upload House Plan</h3>
+            <p>Upload a house plan image (JPG/PNG) or a PDF file. Maximum size: 5 MB.</p>
+
+            <input
+                type="file"
+                id="house_plan"
+                name="house_plan"
+                accept=".jpg,.jpeg,.png,.pdf,application/pdf,image/jpeg,image/png"
+            >
+
+            <p id="fileName">No file selected.</p>
+            <img id="preview" alt="House plan preview">
+        </div>
+
+        <button type="submit">Save House Details</button>
+
+    </form>
+
+</div>
+
+<script>
+    const fileInput = document.getElementById("house_plan");
+    const preview = document.getElementById("preview");
+    const fileName = document.getElementB
+

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn More | House Price Prediction</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(10, 25, 45, 0.75),
+                        rgba(10, 25, 45, 0.85)),
+                        url("https://images.unsplash.com/photo-1600596542815-ffad4c1539a9");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+        }
+
+        nav {
+            background: #102a43;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 45px auto;
+            padding: 35px;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            color: #243b53;
+            padding: 30px;
+            margin-bottom: 25px;
+            border-radius: 15px;
+            line-height: 1.7;
+        }
+
+        h1, h2 {
+            color: #102a43;
+            margin-bottom: 15px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .feature {
+            background: #eaf2f8;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 13px;
+            margin: 10px 0;
+            border: 1px solid #bcccdc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        button {
+            background: #102a43;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #243b53;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #102a43;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h2>House Price Prediction</h2>
+    <div>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'predict' %}">Predict</a>
+        <a href="{% url 'history' %}">History</a>
+    </div>
+</nav>
+
+<div class="container">
+
+    <section class="section">
+        <h1>About Our Project</h1>
+        <p>
+            House Price Prediction is a machine learning based web application
+            designed to estimate house prices using important property details.
+            It helps users get an estimated price quickly and easily.
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Our Features</h2>
+
+        <div class="features">
+            <div class="feature">
+                <h3>🏠 Price Prediction</h3>
+                <p>Get an estimated house price using area, bedrooms and bathrooms.</p>
+            </div>
+
+            <div class="feature">
+                <h3>👤 User Account</h3>
+                <p>Create an account and securely log in to use the application.</p>
+            </div>
+
+            <div class="feature">
+                <h3>📷 House Plan Upload</h3>
+                <p>Upload a house image or plan along with your property details.</p>
+            </div>
+
+            <div class="feature">
+                <h3>📊 Prediction History</h3>
+                <p>View your previous predictions and manage your history.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How It Works</h2>
+        <p>
+            1. Register or log in to your account.<br>
+            2. Enter the house area, bedrooms and bathrooms.<br>
+            3. Add other property details and upload a house plan if needed.<br>
+            4. Click the Predict button to get an estimated price.<br>
+            5. View your previous predictions in the History page.
+        </p>
+        <p><b>Note:</b> The uploaded image is stored with your prediction.
+        The current prediction model uses area, bedrooms and bathrooms;
+        it does not analyse the image.</p>
+    </section>
+
+    <section class="section">
+        <h2>Technology Used</h2>
+        <p>
+            <b>Frontend:</b> HTML, CSS<br>
+            <b>Backend:</b> Python, Django<br>
+            <b>Machine Learning:</b> Linear Regression<br>
+            <b>Database:</b> SQLite
+        </p>
+    </section>
+
+    <section class="section">
+        <h2>Share Your Feedback</h2>
+        {% if messages %}
+    {% for message in messages %}
+        <p style="background:#d4edda; color:#155724; padding:12px; border-radius:7px; margin-bottom:15px;">
+            {{ message }}
+        </p>
+    {% endfor %}
+    {% endif %}
+        <p>We would love to hear your suggestions about our website.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="text" name="name"
+                   placeholder="Your Name" required>
+
+            <select name="rating" required>
+                <option value="">Rate Our Website</option>
+                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                <option value="4">⭐⭐⭐⭐ Very Good</option>
+                <option value="3">⭐⭐⭐ Good</option>
+                <option value="2">⭐⭐ Needs Improvement</option>
+                <option value="1">⭐ Poor</option>
+            </select>
+
+            <textarea name="message" rows="5"
+                      placeholder="Write your feedback..." required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+        </form>
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 House Price Prediction | All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

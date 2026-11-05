@@ -1,350 +1,400 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Predict House Price | HousePredict</title>
+    <title>House Price Prediction</title>
 
-
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        background: #f4f6fb;
-        color: #1e293b;
-        min-height: 100vh;
-    }
-
-    .navbar {
-        background: white;
-        padding: 20px 7%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 12px;
-        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.05);
-    }
-
-    .brand {
-        color: #5145e5;
-        font-size: 22px;
-        font-weight: bold;
-    }
-
-    .nav-link {
-        text-decoration: none;
-        color: #5145e5;
-        font-weight: bold;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 650px;
-        margin: 40px auto;
-        padding: 0 18px;
-    }
-
-    .heading {
-        text-align: center;
-        margin-bottom: 25px;
-    }
-
-    .heading .icon {
-        font-size: 48px;
-        margin-bottom: 12px;
-    }
-
-    .heading h1 {
-        font-size: 29px;
-        color: #1e293b;
-        margin-bottom: 10px;
-    }
-
-    .heading p {
-        color: #64748b;
-        line-height: 1.6;
-    }
-
-    .form-card {
-        background: white;
-        padding: 32px;
-        border-radius: 20px;
-        box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
-        border: 1px solid #e9eaf3;
-    }
-
-    .form-title {
-        font-size: 20px;
-        margin-bottom: 25px;
-    }
-
-    .form-group {
-        margin-bottom: 21px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 9px;
-        font-size: 14px;
-        font-weight: bold;
-        color: #334155;
-    }
-
-    input {
-        width: 100%;
-        padding: 14px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        font-size: 15px;
-        outline: none;
-        background: #ffffff;
-        transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    input:focus {
-        border-color: #5145e5;
-        box-shadow: 0 0 0 3px rgba(81, 69, 229, 0.12);
-    }
-
-    input::placeholder {
-        color: #94a3b8;
-    }
-
-    .hint {
-        color: #94a3b8;
-        font-size: 12px;
-        margin-top: 7px;
-    }
-
-    .predict-btn {
-        width: 100%;
-        padding: 15px;
-        margin-top: 8px;
-        background: linear-gradient(135deg, #5145e5, #7c3aed);
-        color: white;
-        border: none;
-        border-radius: 11px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .predict-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(81, 69, 229, 0.25);
-    }
-
-    .message {
-        background: #fff1f2;
-        color: #be123c;
-        padding: 12px;
-        margin-bottom: 18px;
-        border-radius: 9px;
-        font-size: 14px;
-        line-height: 1.5;
-    }
-
-    .result {
-        margin-top: 25px;
-        padding: 24px;
-        background: #ecfdf5;
-        border: 1px solid #a7f3d0;
-        border-radius: 15px;
-        text-align: center;
-    }
-
-    .result h2 {
-        font-size: 17px;
-        color: #047857;
-        margin-bottom: 12px;
-    }
-
-    .price {
-        font-size: 30px;
-        font-weight: bold;
-        color: #065f46;
-        overflow-wrap: anywhere;
-    }
-
-    .result-note {
-        font-size: 12px;
-        line-height: 1.5;
-        color: #047857;
-        margin-top: 12px;
-    }
-
-    .back-link {
-        display: block;
-        text-align: center;
-        margin: 25px 0;
-        color: #5145e5;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    .back-link:hover,
-    .nav-link:hover {
-        text-decoration: underline;
-    }
-
-    footer {
-        text-align: center;
-        color: #94a3b8;
-        font-size: 13px;
-        padding: 20px;
-    }
-
-    @media (max-width: 500px) {
-        .navbar {
-            padding: 18px 5%;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
-        .brand {
-            font-size: 19px;
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(5,25,55,.45), rgba(5,25,55,.45)),
+                url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c")
+                center/cover fixed no-repeat;
+        }
+
+        .navbar {
+            background: #082b50;
+            color: white;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 22px;
+            font-weight: bold;
+        }
+
+        .nav-links a:hover {
+            color: #40b5ff;
         }
 
         .container {
-            margin: 28px auto;
-            padding: 0 14px;
+            width: 90%;
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 35px;
+            background: rgba(255,255,255,.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,.25);
         }
 
-        .form-card {
-            padding: 23px 18px;
+        h1 {
+            text-align: center;
+            color: #103c65;
+            margin-bottom: 10px;
         }
 
-        .heading h1 {
-            font-size: 24px;
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
         }
 
-        .price {
-            font-size: 25px;
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
         }
-    }
-</style>
 
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
 
+        label {
+            color: #173c60;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccd6e0;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #0875e1;
+        }
+
+        .full {
+            grid-column: 1 / -1;
+        }
+
+        .file-box {
+            border: 2px dashed #8aafd6;
+            padding: 22px;
+            border-radius: 10px;
+            background: #f5f9ff;
+        }
+
+        .file-box input {
+            border: none;
+            padding: 8px 0;
+        }
+
+        #preview {
+            max-width: 100%;
+            max-height: 250px;
+            margin-top: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        #fileName {
+            margin-top: 10px;
+            color: #174a78;
+        }
+
+        .remove-btn {
+            display: none;
+            margin-top: 10px;
+            background: #e53935;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .predict-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 15px;
+            background: #075be5;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .predict-btn:hover {
+            background: #0645ad;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 22px;
+            text-align: center;
+            background: #e8f7ee;
+            border: 1px solid #a5d8b5;
+            border-radius: 12px;
+            color: #087c45;
+        }
+
+        .messages {
+            margin-bottom: 18px;
+            text-align: center;
+            color: #b3261e;
+        }
+
+        @media(max-width: 650px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full {
+                grid-column: auto;
+            }
+
+            .container {
+                padding: 22px 16px;
+            }
+
+            .nav-links a {
+                margin-left: 10px;
+            }
+        }
+            .upload-icon {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 24px;
+    background: #075be5;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.upload-icon:hover {
+    background: #0645ad;
+    transform: translateY(-2px);
+}
+    </style>
 </head>
 
 <body>
 
-
 <nav class="navbar">
-    <div class="brand">🏠 HousePredict</div>
-    <a class="nav-link" href="{% url 'home' %}">← Back to Dashboard</a>
+    <div class="logo">⌂ House Price Prediction</div>
+
+    <div class="nav-links">
+        <a href="{% url 'history' %}">History</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
 </nav>
 
-<main class="container">
+<div class="container">
 
-    <header class="heading">
-        <div class="icon">🏡</div>
-        <h1>House Price Prediction</h1>
-        <p>Enter the house details to get an estimated price.</p>
-    </header>
+    <h1>House Price Prediction</h1>
+    <p class="subtitle">Enter your house details to estimate its price.</p>
 
-    <section class="form-card">
-
-        <h2 class="form-title">📋 House Details</h2>
-
-        {% if messages %}
+    {% if messages %}
+        <div class="messages">
             {% for message in messages %}
-                <p class="message">{{ message }}</p>
+                <p>{{ message }}</p>
             {% endfor %}
-        {% endif %}
+        </div>
+    {% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-grid">
 
             <div class="form-group">
-                <label for="area">📐 Area (square feet)</label>
-                <input
-                    type="number"
-                    id="area"
-                    name="area"
-                    min="1"
-                    step="any"
-                    placeholder="e.g. 1200"
-                    required
-                >
-                <p class="hint">Enter the total house area in square feet.</p>
+                <label>Area (sq.ft)</label>
+                <input type="number" name="area" min="1"
+                       step="any" placeholder="Enter area" required>
             </div>
 
             <div class="form-group">
-                <label for="bedrooms">🛏️ Number of Bedrooms</label>
-                <input
-                    type="number"
-                    id="bedrooms"
-                    name="bedrooms"
-                    min="1"
-                    step="1"
-                    placeholder="e.g. 3"
-                    required
-                >
+                <label>Location</label>
+                <input type="text" name="location"
+                       placeholder="Enter location" required>
             </div>
 
             <div class="form-group">
-                <label for="bathrooms">🛁 Number of Bathrooms</label>
-                <input
-                    type="number"
-                    id="bathrooms"
-                    name="bathrooms"
-                    min="1"
-                    step="1"
-                    placeholder="e.g. 2"
-                    required
-                >
+                <label>Bedrooms</label>
+                <select name="bedrooms" required>
+                    <option value="">Select bedrooms</option>
+                    <option value="1">1 Bedroom</option>
+                    <option value="2">2 Bedrooms</option>
+                    <option value="3">3 Bedrooms</option>
+                    <option value="4">4 Bedrooms</option>
+                    <option value="5">5 Bedrooms</option>
+                </select>
             </div>
 
             <div class="form-group">
-                <label for="location">📍 Location</label>
-                <input
-                    type="text"
-                    id="location"
-                    name="location"
-                    placeholder="e.g. Kalpetta"
-                    required
-                >
+                <label>Bathrooms</label>
+                <select name="bathrooms" required>
+                    <option value="">Select bathrooms</option>
+                    <option value="1">1 Bathroom</option>
+                    <option value="2">2 Bathrooms</option>
+                    <option value="3">3 Bathrooms</option>
+                    <option value="4">4 Bathrooms</option>
+                </select>
             </div>
 
-            <button type="submit" class="predict-btn">
-                ✨ Predict House Price
-            </button>
-        </form>
-
-        {% if predicted_price %}
-            <div class="result">
-                <h2>🎉 Estimated House Price</h2>
-
-                <div class="price">
-                    ₹{{ predicted_price|floatformat:2 }}
-                </div>
-
-                <p class="result-note">
-                    This is a model-based estimate, not a guaranteed
-                    market price.
-                </p>
+            <div class="form-group">
+                <label>Kitchen</label>
+                <select name="kitchen" required>
+                    <option value="1">1 Kitchen</option>
+                    <option value="2">2 Kitchens</option>
+                </select>
             </div>
-        {% endif %}
 
-    </section>
+            <div class="form-group">
+                <label>Floors</label>
+                <select name="floors" required>
+                    <option value="1">1 Floor</option>
+                    <option value="2">2 Floors</option>
+                    <option value="3">3 Floors</option>
+                </select>
+            </div>
 
-    <a class="back-link" href="{% url 'home' %}">
-        ← Return to Dashboard
-    </a>
+            <div class="form-group">
+                <label>Parking</label>
+                <select name="parking" required>
+                    <option value="0">No Parking</option>
+                    <option value="1">1 Parking Space</option>
+                    <option value="2">2 Parking Spaces</option>
+                </select>
+            </div>
 
-</main>
+            <div class="form-group">
+                <label>House Type</label>
+                <select name="house_type">
+                    <option value="">Select house type</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Apartment">Apartment</option>
+                    <option value="Independent House">Independent House</option>
+                </select>
+            </div>
 
-<footer>
-    HousePredict · House Price Prediction System
-</footer>
+            <div class="form-group full">
+                <label>Furnishing</label>
+                <select name="furnishing">
+                    <option value="">Select furnishing</option>
+                    <option value="Furnished">Furnished</option>
+                    <option value="Semi-Furnished">Semi-Furnished</option>
+                    <option value="Unfurnished">Unfurnished</option>
+                </select>
+            </div>
 
+            <div class="form-group full">
+
+    <div class="file-box">
+    <label for="housePlan" class="upload-icon">
+    📤
+    <span>Upload House Photo</span>
+</label>
+        <input type="file"
+               name="house_plan"
+               id="housePlan"
+               accept=".jpg,.jpeg,.png"
+               hidden>
+
+        <img id="preview" alt="House photo preview">
+
+        <button type="button"
+                id="removeBtn"
+                class="remove-btn"
+                onclick="removeFile()">
+            Remove Image
+        </button>
+    </div>
+</div>
+          
+        </div>
+
+        <button type="submit" class="predict-btn">
+            Predict House Price
+        </button>
+    </form>
+
+    {% if predicted_price %}
+    <div class="result">
+        <h2>Prediction Result</h2>
+        <h1>₹ {{ predicted_price|floatformat:2 }}</h1>
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    const fileInput = document.getElementById("housePlan");
+    const preview = document.getElementById("preview");
+    const fileName = document.getElementById("fileName");
+    const removeBtn = document.getElementById("removeBtn");
+
+    fileInput.addEventListener("change", function () {
+        const file = this.files[0];
+
+        preview.style.display = "none";
+        preview.src = "";
+        removeBtn.style.display = "none";
+
+        if (!file) {
+            fileName.textContent = "Choose your house plan (optional)";
+            return;
+        }
+
+        fileName.textContent = file.name;
+        removeBtn.style.display = "inline-block";
+
+        if (file.type.startsWith("image/")) {
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+        }
+    });
+
+    function removeFile() {
+        fileInput.value = "";
+        preview.src = "";
+        preview.style.display = "none";
+        fileName.textContent = "Choose your house plan (optional)";
+        removeBtn.style.display = "none";
+    }
+</script>
 
 </body>
 </html>

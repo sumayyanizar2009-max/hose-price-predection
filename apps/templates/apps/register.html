@@ -1,313 +1,430 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register | HousePredict</title>
 
+    <title>Create Account | HomeValue</title>
 
-<style>
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #eef2ff, #f5f3ff, #ede9fe);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 25px 15px;
-    }
-
-    .container {
-        width: 100%;
-        max-width: 430px;
-        background: white;
-        padding: 35px 32px;
-        border-radius: 22px;
-        box-shadow: 0 15px 45px rgba(81, 69, 229, 0.12);
-        border: 1px solid #ede9fe;
-    }
-
-    .logo {
-        width: 70px;
-        height: 70px;
-        margin: 0 auto 18px;
-        border-radius: 21px;
-        background: linear-gradient(135deg, #5145e5, #8b5cf6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 35px;
-        box-shadow: 0 8px 20px rgba(81, 69, 229, 0.2);
-    }
-
-    h1 {
-        text-align: center;
-        color: #1e293b;
-        font-size: 27px;
-        margin-bottom: 10px;
-    }
-
-    .subtitle {
-        text-align: center;
-        color: #64748b;
-        font-size: 14px;
-        line-height: 1.6;
-        margin-bottom: 25px;
-    }
-
-    .messages {
-        margin-bottom: 18px;
-    }
-
-    .message {
-        background: #fff1f2;
-        color: #be123c;
-        padding: 12px;
-        border-radius: 9px;
-        font-size: 14px;
-        margin-bottom: 8px;
-        line-height: 1.5;
-    }
-
-    .form-group {
-        margin-bottom: 17px;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        color: #334155;
-        font-weight: bold;
-        font-size: 14px;
-    }
-
-    .input-wrap {
-        position: relative;
-    }
-
-    input {
-        width: 100%;
-        padding: 13px;
-        border: 1px solid #cbd5e1;
-        border-radius: 10px;
-        font-size: 14px;
-        outline: none;
-        transition: 0.2s;
-    }
-
-    input:focus {
-        border-color: #5145e5;
-        box-shadow: 0 0 0 3px rgba(81, 69, 229, 0.12);
-    }
-
-    input::placeholder {
-        color: #94a3b8;
-    }
-
-    .password-input {
-        padding-right: 72px;
-    }
-
-    .toggle-password {
-        position: absolute;
-        right: 12px;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        background: transparent;
-        color: #5145e5;
-        font-size: 12px;
-        font-weight: bold;
-        cursor: pointer;
-        padding: 8px 0 8px 8px;
-    }
-
-    .register-btn {
-        width: 100%;
-        padding: 15px;
-        margin-top: 8px;
-        background: linear-gradient(135deg, #5145e5, #7c3aed);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .register-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 18px rgba(81, 69, 229, 0.25);
-    }
-
-    .login-text {
-        text-align: center;
-        margin-top: 23px;
-        font-size: 14px;
-        color: #64748b;
-        line-height: 1.8;
-    }
-
-    a {
-        color: #5145e5;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-
-    .footer {
-        text-align: center;
-        margin-top: 22px;
-        color: #94a3b8;
-        font-size: 12px;
-    }
-
-    @media (max-width: 400px) {
-        .container {
-            padding: 28px 20px;
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        h1 {
-            font-size: 24px;
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 15px;
+            overflow-x: hidden;
+            background: linear-gradient(
+                135deg,
+                #111936 0%,
+                #293d76 45%,
+                #7959a6 100%
+            );
+            position: relative;
         }
-    }
-</style>
 
+        /* Decorative background shapes */
 
+        .background-shape {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(2px);
+            pointer-events: none;
+        }
+
+        .shape-one {
+            width: 350px;
+            height: 350px;
+            background: rgba(61, 220, 190, 0.28);
+            top: -100px;
+            left: -100px;
+        }
+
+        .shape-two {
+            width: 300px;
+            height: 300px;
+            background: rgba(167, 139, 250, 0.35);
+            bottom: -100px;
+            right: -60px;
+        }
+
+        .shape-three {
+            width: 150px;
+            height: 150px;
+            background: rgba(96, 165, 250, 0.22);
+            top: 48%;
+            right: 12%;
+        }
+
+        /* Main glass card */
+
+        .register-card {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 480px;
+            padding: 42px 45px;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            color: white;
+        }
+
+        .brand {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+        }
+
+        .brand span {
+            color: #6ef0d0;
+        }
+
+        .heading {
+            font-size: 34px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 27px;
+        }
+
+        /* Django messages */
+
+        .messages {
+            list-style: none;
+            margin-bottom: 18px;
+        }
+
+        .messages li {
+            background: rgba(255, 225, 225, 0.96);
+            color: #a61b1b;
+            padding: 12px;
+            border-radius: 9px;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        /* Input fields */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.92);
+        }
+
+        .input-wrapper {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            transition: 0.25s;
+        }
+
+        .input-wrapper:focus-within {
+            border-color: #61e7c9;
+            box-shadow: 0 0 0 4px rgba(97, 231, 201, 0.15);
+        }
+
+        .input-icon {
+            padding-left: 15px;
+            font-size: 18px;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            min-width: 0;
+            padding: 15px 12px;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #263451;
+            font-size: 14px;
+        }
+
+        .input-wrapper input::placeholder {
+            color: #9299a8;
+        }
+
+        /* Terms */
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 20px 0;
+            font-size: 12px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .terms input {
+            margin-top: 3px;
+            accent-color: #39c6a6;
+            flex-shrink: 0;
+        }
+
+        .terms a {
+            color: #7cf0d5;
+            text-decoration: underline;
+        }
+
+        /* Create account button */
+
+        .register-button {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #25b99b, #43d6b4);
+            color: #102c43;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 8px 22px rgba(37, 185, 155, 0.18);
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(90deg, #43d6b4, #72efd0);
+            box-shadow: 0 12px 28px rgba(37, 185, 155, 0.28);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 25px 0;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .login-text {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 22px;
+        }
+
+        .login-text a {
+            color: #72f0d1;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .login-text a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            text-align: center;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .back-home a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 12px;
+        }
+
+        .back-home a:hover {
+            color: white;
+        }
+
+        .footer-note {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 11px;
+            margin-top: 22px;
+        }
+
+        /* Mobile responsive */
+
+        @media (max-width: 520px) {
+            body {
+                padding: 20px 13px;
+            }
+
+            .register-card {
+                padding: 32px 23px;
+                border-radius: 20px;
+            }
+
+            .heading {
+                font-size: 29px;
+            }
+
+            .shape-three {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+    <div class="background-shape shape-one"></div>
+    <div class="background-shape shape-two"></div>
+    <div class="background-shape shape-three"></div>
 
-<main class="container">
+    <main class="register-card">
 
-    <div class="logo">🏠</div>
-
-    <h1>Create Account</h1>
-    <p class="subtitle">
-        Join HousePredict today!<br>
-        Start predicting house prices.
-    </p>
-
-    {% if messages %}
-        <div class="messages">
-            {% for message in messages %}
-                <p class="message">{{ message }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-    <form method="POST">
-        {% csrf_token %}
-
-        <div class="form-group">
-            <label for="username">👤 Username</label>
-            <input
-                type="text"
-                id="username"
-                name="username"
-                placeholder="Choose a username"
-                autocomplete="username"
-                required
-            >
+        <div class="brand">
+            🏠 Home<span>Value</span>
         </div>
 
-        <div class="form-group">
-            <label for="email">📧 Email Address</label>
-            <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your email"
-                autocomplete="email"
-                required
-            >
-        </div>
+        <h1 class="heading">Create Account</h1>
 
-        <div class="form-group">
-            <label for="password">🔒 Password</label>
+        <p class="subtitle">
+            Join HomeValue and start exploring estimated house prices.
+            Create your account to get started.
+        </p>
 
-            <div class="input-wrap">
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    class="password-input"
-                    placeholder="Create a password"
-                    autocomplete="new-password"
-                    required
-                >
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-                <button
-                    type="button"
-                    class="toggle-password"
-                    data-target="password"
-                >Show</button>
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <div class="input-wrapper">
+                    <span class="input-icon">👤</span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                        autocomplete="username"
+                        required
+                    >
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <label for="confirm_password">🔐 Confirm Password</label>
+            <div class="form-group">
+                <label for="email">Email Address</label>
 
-            <div class="input-wrap">
-                <input
-                    type="password"
-                    id="confirm_password"
-                    name="confirm_password"
-                    class="password-input"
-                    placeholder="Re-enter your password"
-                    autocomplete="new-password"
-                    required
-                >
+                <div class="input-wrapper">
+                    <span class="input-icon">✉️</span>
 
-                <button
-                    type="button"
-                    class="toggle-password"
-                    data-target="confirm_password"
-                >Show</button>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        autocomplete="email"
+                        required
+                    >
+                </div>
             </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <div class="input-wrapper">
+                    <span class="input-icon">🔒</span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+
+                <div class="input-wrapper">
+                    <span class="input-icon">🔐</span>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="Enter your password again"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+                </div>
+            </div>
+
+            <label class="terms">
+                <input type="checkbox" required>
+                <span>
+                    I agree to the terms of use and understand that
+                    house prices shown are estimates.
+                </span>
+            </label>
+
+            <button type="submit" class="register-button">
+                Create Account →
+            </button>
+
+        </form>
+
+        <div class="divider">Already a member?</div>
+
+        <p class="login-text">
+            Have an account?
+            <a href="{% url 'login' %}">Log in</a>
+        </p>
+
+        <div class="back-home">
+            <a href="{% url 'home' %}">← Back to Home</a>
         </div>
 
-        <button type="submit" class="register-btn">
-            Create My Account →
-        </button>
-    </form>
+        <div class="footer-note">
+            HomeValue · Smart House Price Prediction
+        </div>
 
-    <p class="login-text">
-        Already have an account?<br>
-        <a href="{% url 'login' %}">Login here</a>
-    </p>
-
-    <div class="footer">
-        HousePredict · House Price Prediction System
-    </div>
-
-</main>
-
-<script>
-    document.querySelectorAll(".toggle-password").forEach(function(button) {
-        button.addEventListener("click", function() {
-            const input = document.getElementById(this.dataset.target);
-            const isHidden = input.type === "password";
-
-            input.type = isHidden ? "text" : "password";
-            this.textContent = isHidden ? "Hide" : "Show";
-            this.setAttribute("aria-pressed", String(isHidden));
-        });
-    });
-</script>
-
+    </main>
 
 </body>
 </html>
+
